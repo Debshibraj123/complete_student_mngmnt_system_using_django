@@ -91,12 +91,12 @@
        </li>
        <li class="nav-item dropdown has-arrow">
           <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-          <span class="user-img"><img class="rounded-circle" src="{% static 'assets/img/profiles/avatar-01.jpg' %}" width="31" alt="Ryan Taylor"></span>
+          <span class="user-img"><img class="rounded-circle" src="{{user.profile_pic}}" width="31" alt="Ryan Taylor"></span>
           </a>
           <div class="dropdown-menu">
              <div class="user-header">
                 <div class="avatar avatar-sm">
-                   <img src="{% static 'assets/img/profiles/avatar-01.jpg' %}" alt="User Image" class="avatar-img rounded-circle">
+                   <img src="/{{user.profile_pic}}" alt="User Image" class="avatar-img rounded-circle">
                 </div>
                 <div class="user-text">
                    <h6>{{user.first_name}} {{user.last_name}}</h6>
@@ -111,7 +111,7 @@
                    {% endif %}
                 </div>
              </div>
-             <a class="dropdown-item" href="profile.html">My Profile</a>
+             <a class="dropdown-item" href={% url 'profile' %}>My Profile Update</a>
              <a class="dropdown-item" href="inbox.html">Inbox</a>
              <a class="dropdown-item" href={% url 'logout' %}>Logout</a>
           </div>

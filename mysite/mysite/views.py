@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponse
 from app.EmailBackend import EmailBackend
 from django.contrib.auth import authenticate, logout, login
-#import messages
 from django.contrib import messages
+from app.models import CustomUser
 
 
 def BASE(request):
@@ -35,3 +35,39 @@ def doLogin(request):
 def doLogout(request):
     logout(request)
     return redirect('login')
+
+def PROFILE(request):
+    user = CustomUser.objects.get(id = request.user.id)
+    
+    context = {
+       "user": user,    
+    }
+    return render(request, 'profile.html')
+
+
+def PROFILE_UPDATE(request):
+    if request.method == "POST":
+        profile_pic = request.FILES.get('profile_pics')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        #email = request.POST.get('email')
+        #username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        try:
+            customuser = CustomUser.objects.get(id = request.user.id)
+            customuser.first_name = first_name
+            customuser.last_name = last_name
+            customuser.profile_pic = profile_pic
+
+            if password != None and password != '':
+                customuser.set_password(password)
+            customuser.save()
+            messages.success(request, 'Your Profile Updated Successfully')
+            redirect('profile')
+
+
+        except:
+            messages.error(request, 'Your Profile has not Updated')
+    return render(request, 'profile.html')
+
