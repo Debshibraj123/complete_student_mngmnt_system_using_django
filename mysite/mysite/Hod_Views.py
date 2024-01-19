@@ -40,7 +40,7 @@ def ADD_STUDENT(request):
                email = email,
                user_type = 3
             )
-            user.set_password = password
+            user.set_password(password)
             user.save()
 
             course = Course.objects.get(id = course)
@@ -56,7 +56,7 @@ def ADD_STUDENT(request):
             )
 
             student.save()
-            messages.success(request, 'Student SuccessFully Saved')
+            messages.success(request, user.first_name + " " + user.last_name , "Your Profile Has been Successfully added")
             return redirect('add_student')
             
 
@@ -66,3 +66,13 @@ def ADD_STUDENT(request):
     }
     return render(request, 'Hod/add_student.html', context)
 
+
+def VIEW_STUDENT(request):
+
+    student = Student.objects.all()
+    
+
+    context = {
+      'student':student
+    }
+    return render(request, 'Hod/view_student.html',context)
