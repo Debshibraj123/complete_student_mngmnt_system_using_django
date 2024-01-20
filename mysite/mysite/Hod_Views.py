@@ -143,3 +143,10 @@ def UPDATE_STUDENT(request):
         return redirect('view_student')
         
     return render(request, 'Hod/edit_student.html')
+
+
+def DELETE_STUDENT(request, admin):
+    student = CustomUser.objects.get(id = admin)
+    student.delete()
+    messages.success(request, 'Record are Successfully deleted')
+    return redirect('view_student')
