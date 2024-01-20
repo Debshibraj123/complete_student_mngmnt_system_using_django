@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from app.models import *
@@ -76,3 +77,69 @@ def VIEW_STUDENT(request):
       'student':student
     }
     return render(request, 'Hod/view_student.html',context)
+
+def EDIT_STUDENT(request, id):
+    
+    student = Student.objects.filter(id = id)
+    course = Course.objects.all()
+    seassion_year = Session_Year.objects.all()
+
+    context = {
+       'student':student,
+       'course': course,
+       'seassion_year':seassion_year,
+    }
+    
+    return render(request, 'Hod/edit_student.html', context)
+
+def UPDATE_STUDENT(request):
+    
+    if request.method == "POST":
+        
+        student_id = request.POST.get('student_id')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        address = request.POST.get('address')
+        course = request.POST.get('course')
+        session_year = request.POST.get('session_year')
+        gender = request.POST.get('gender')
+
+        user = CustomUser.objects.get(id=student_id)
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+
+        # Check if the new username is unique
+        if CustomUser.objects.filter(username=username).exclude(id=student_id).exists():
+            messages.error(request, "Username is already taken. Please choose a different one.")
+            return render(request, 'Hod/edit_student.html')
+
+        user.username = username
+
+        if password != None and password != '':
+            user.set_password(password)
+        
+        try:
+            user.save()
+        except IntegrityError:
+            messages.error(request, "Username is already taken. Please choose a different one.")
+            return render(request, 'Hod/edit_student.html')
+
+        student = Student.objects.get(admin=student_id)
+        student.address = address
+        student.gender = gender
+
+        course = Course.objects.get(id=course)
+        student.course = course
+
+        session_year = Session_Year.objects.get(id=session_year)
+        student.session_year = session_year
+
+        student.save()
+        messages.success(request, "Profile Updated Successfully")
+        return redirect('view_student')
+        
+    return render(request, 'Hod/edit_student.html')
