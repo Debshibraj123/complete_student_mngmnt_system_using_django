@@ -3,9 +3,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from app.models import *
 from django.contrib import messages
+from django.http import Http404
 
 
-# @login_required
+
+@login_required(login_url='/')
 def HOME(request):
     return render(request,'HOD/home.html')
 
@@ -164,4 +166,41 @@ def ADD_COURSE(request):
 
 
     return render(request, 'Hod/add_course.html')
+  
+
+
+def VIEW_COURSE(request):
     
+    course = Course.objects.all()
+
+    context = {
+       'course':course   
+    }
+    
+    return render(request, 'Hod/view_course.html', context)
+
+def EDIT_COURSE(request, id):
+    course = Course.objects.get(id = id)
+
+    context = {
+      'course': course
+    }
+    return render(request, 'Hod/edit_course.html', context)
+
+
+def UPDATE_COURSE(request):
+    if request.method == 'POST':
+        name = request.POST.get('course_name')
+        course_id = request.POST.get('course_id')
+
+        try:
+            course = Course.objects.get(id=course_id)
+        except Course.DoesNotExist:
+            raise Http404("Course not found")
+
+        course.course_name = name
+        course.save()
+        messages.success(request, "Course Updated")
+        return redirect('view_course')
+
+    return render(request, 'Hod/edit_course.html')
