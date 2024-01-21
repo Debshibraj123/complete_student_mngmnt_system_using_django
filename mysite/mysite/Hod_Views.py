@@ -1,5 +1,5 @@
 from django.db import IntegrityError
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from app.models import *
 from django.contrib import messages
@@ -212,3 +212,92 @@ def DELETE_COURSE(request, id):
     messages.success(request, "Successfully Deleted")
 
     return redirect('view_course')
+
+def ADD_STAFF(request):
+
+    if request.method == "POST":
+        #student_id = request.POST.get('student_id')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        address = request.POST.get('address')
+        gender = request.POST.get('gender')
+
+        if CustomUser.objects.filter(email = email).exists():
+            messages.error(request,"Email already exists.")
+            return redirect('add_staff')
+        
+        if CustomUser.objects.filter(username = username).exists():
+            messages.error(request,"Username already exists.")
+            return redirect('add_staff')
+        
+
+        else:
+            user = CustomUser(first_name=first_name, last_name=last_name, email=email, username=username,user_type = 2)
+            user.set_password(password)
+            user.save()
+
+            staff = Staff(
+              admin = user,
+              address = address,
+              gender = gender
+            )
+            staff.save()
+            messages.success(request,"Staff added Successfully!")
+            return redirect("add_staff")
+        return redirect(request, 'Hod/add_staff.html')
+
+
+
+    return render(request, 'Hod/add_staff.html')
+
+def VIEW_STAFF(request):
+    staff=Staff.objects.all()
+    context={'staff':staff}
+    return render(request, 'Hod/view_staff.html', context)
+
+def EDIT_STAFF(request, id):
+    staff = get_object_or_404(Staff, id=id)
+    context = {'staff': staff}
+    return render(request, 'Hod/edit_staff.html', context)
+
+def UPDATE_STAFF(request):
+
+    if request.method == "POST":
+        staff_id = request.POST.get('staff_id')
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        address =  request.POST.get('address')
+        gender =  request.POST.get('gender')
+
+        user = CustomUser.objects.get(id = staff_id)
+        user.username = username
+        user.first_name = first_name
+        user.last_name = last_name
+        user.email = email
+
+        if password != None and password != '':
+            user.set_password(password)
+
+        user.save()
+        staff = Staff.objects.get(admin = staff_id)
+        staff.gender = gender
+        staff.address = address
+
+        staff.save()
+        messages.success(request,'Profile Updated Successfully!')
+        return redirect('view_staff')
+
+    return render(request, 'Hod/edit_staff.html')
+
+def DELETE_STAFF(request, admin):
+    staff = CustomUser.objects.get(id = admin)
+    staff.delete()
+    messages.success(request,"Deleted Successfully")
+
+    return redirect('view_staff')

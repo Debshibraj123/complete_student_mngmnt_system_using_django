@@ -20,6 +20,18 @@
           </div>
        </div>
        <div class="row ">
+         {% if messages %}
+         {% for messages in messages %}
+         {% if messages.tags  == 'error' %}
+         <div class="alert alert-warning alert-dismissible fade show" role="alert">
+           {{messages}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
           <div class="col-sm-12">
              <div class="card card-table">
                 <div class="card-body">
@@ -30,15 +42,13 @@
                                <th>ID</th>
                                <th>Name</th>
                                <th>Email</th>
-                     
                                <th>Gender</th>
-                              
                                <th>Address</th>
                                <th class="text-right">Actions</th>
                             </tr>
                          </thead>
                          <tbody>
-                           {% for s in student %}
+                           {% for s in staff %}
                             <tr>
                                <td>{{ s.pk }}</td>
                                <td>
@@ -47,16 +57,15 @@
                                   </h2>
                                </td>
                                <td>{{s.admin.email}}</td>
-                               <td>{{s.course}}</td>
-                               <td>{{s.gender}}</td>
                               
+                               <td>{{s.gender}}</td>
                                <td>{{s.address}}</td>
                                <td class="text-right">
                                   <div class="actions">
-                                     <a href="{% url 'edit_student' s.id %}" class="btn btn-sm bg-success-light mr-2">
+                                     <a href="{% url 'edit_staff' s.id %}" class="btn btn-sm bg-success-light mr-2">
                                      <i class="fas fa-pen"></i>
                                      </a>
-                                     <a href="{% url 'delete_student' s.admin.id %}" class="btn btn-sm bg-danger-light">
+                                     <a href="{% url 'delete_staff' s.admin.id %}" class="btn btn-sm bg-danger-light">
                                      <i class="fas fa-trash"></i>
                                      </a>
                                   </div>
