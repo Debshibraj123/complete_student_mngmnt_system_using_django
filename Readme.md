@@ -50,14 +50,18 @@ This project is a comprehensive Student Management System developed using Django
    git clone https://github.com/Debshibraj123/complete_student_mngmnt_system_using_django.git
    cd mysite
 # Install dependencies
-2. pip install -r requirements.txt
+```bash
+pip install -r requirements.txt
 
 # Apply database migrations
-3. python manage.py makemigrations 
-4. python manage.py migrate
+```bash
+python manage.py makemigrations 
+python manage.py migrate
 
 # Create a superuser account
-5. python manage.py createsuperuser
+```bash
+python manage.py createsuperuser
 
 # Run the development server
-6. python manage.py runserver
+```bash
+python manage.py runserver
