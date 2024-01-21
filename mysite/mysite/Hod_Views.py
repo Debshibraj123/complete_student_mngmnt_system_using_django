@@ -301,3 +301,35 @@ def DELETE_STAFF(request, admin):
     messages.success(request,"Deleted Successfully")
 
     return redirect('view_staff')
+
+def ADD_SUBJECT(request):
+    course = Course.objects.all()
+    staff = Staff.objects.all()
+
+    if request.method == "POST":
+        subject_name = request.POST.get('subject_name')
+        courses = request.POST.get('course')
+        staffs = request.POST.get('staff')
+
+        course = Course.objects.get(id = courses)
+        staff = Staff.objects.get(id = staffs)
+
+        subject = Subject(
+          name = subject_name,
+          course = course,
+          staff = staff
+        )
+
+        subject.save()
+        messages.success(request,"Subject Added Successfully")
+        return redirect('add_subject')
+    
+
+    context = {
+        'course':course,
+        'staff':staff,
+    }
+
+
+
+    return render(request, 'Hod/add_subject.html', context)

@@ -60,3 +60,16 @@ class Staff(models.Model):
 
     def __str__(self):
         return self.admin.username
+
+
+
+class Subject(models.Model):
+    name =models.CharField(max_length = 100)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    staff = models.ForeignKey(Staff, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+    
+    def __str__(self):
+        return self.name
