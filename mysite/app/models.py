@@ -41,7 +41,7 @@ class Student(models.Model):
     admin = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     address = models.TextField()
     gender = models.CharField(max_length=100)
-    course = models.ForeignKey(Course, on_delete=models.DO_NOTHING, related_name='students_in_course')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='students_in_course')
     session_year = models.ForeignKey(Session_Year, on_delete=models.DO_NOTHING, related_name='students_in_session_year')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

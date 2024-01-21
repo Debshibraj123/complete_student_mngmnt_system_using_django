@@ -204,3 +204,11 @@ def UPDATE_COURSE(request):
         return redirect('view_course')
 
     return render(request, 'Hod/edit_course.html')
+
+
+def DELETE_COURSE(request, id):
+    course = Course.objects.get(id = id)
+    course.delete()
+    messages.success(request, "Successfully Deleted")
+
+    return redirect('view_course')
