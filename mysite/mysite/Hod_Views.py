@@ -333,3 +333,10 @@ def ADD_SUBJECT(request):
 
 
     return render(request, 'Hod/add_subject.html', context)
+
+def VIEW_SUBJECT(request):
+    subject = Subject.objects.all()
+    context={
+        'subject' : subject
+        }
+    return render(request, 'Hod/view_subject.html', context)

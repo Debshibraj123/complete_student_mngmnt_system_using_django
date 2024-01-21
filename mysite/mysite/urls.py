@@ -37,7 +37,7 @@ urlpatterns = [
     path('Hod/Staff/Delete/<str:admin>', Hod_Views.DELETE_STAFF, name='delete_staff'),
 
     path('Hod/Subject/Add', Hod_Views.ADD_SUBJECT, name='add_subject'),
-
+    path('Hod/Subject/View', Hod_Views.VIEW_SUBJECT, name='view_subject'),
 
    
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
