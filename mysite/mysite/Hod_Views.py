@@ -340,3 +340,59 @@ def VIEW_SUBJECT(request):
         'subject' : subject
         }
     return render(request, 'Hod/view_subject.html', context)
+
+def EDIT_SUBJECT(request, id):
+    
+    subject = Subject.objects.get(id = id)
+    course = Course.objects.all()
+    staff = Staff.objects.all()
+
+    context = {
+       'subject':subject,
+       'course':course,
+       'staff':staff
+    }
+
+    return render(request, 'Hod/edit_subject.html', context)
+
+
+def UPDATE_SUBJECT(request):
+    if request.method == "POST":
+        subject_id = request.POST.get('subject_id')
+        subject_name = request.POST.get('subject_name')
+        course_id = request.POST.get('course')
+        staff_id = request.POST.get('staff')
+
+        # Use get_object_or_404 to retrieve Course and Staff instances
+        course = get_object_or_404(Course, id=course_id)
+        staff = get_object_or_404(Staff, id=staff_id)
+
+        subject = Subject(
+            id=subject_id,
+            name=subject_name,
+            course=course,
+            staff=staff,
+        )
+
+        try:
+            subject.save()
+            messages.success(request, 'Successfully edited the information')
+            return redirect('view_subject')
+        except Exception as e:
+            # Handle the exception, you can print it for debugging purposes
+            print(e)
+            messages.error(request, 'An error occurred while updating the subject.')
+            
+    # If the method is not POST or if there was an error, render the form again
+    subject = Subject.objects.get(id=subject_id)
+    course = Course.objects.all()
+    staff = Staff.objects.all()
+
+    context = {
+        'subject': subject,
+        'course': course,
+        'staff': staff
+    }
+
+    return render(request, 'Hod/edit_subject.html', context)
+    

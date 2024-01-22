@@ -67,7 +67,7 @@ class Subject(models.Model):
     name =models.CharField(max_length = 100)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     staff = models.ForeignKey(Staff, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add = True)
+    created_at = models.DateTimeField(auto_now_add = True, null=True)
     updated_at = models.DateTimeField(auto_now = True)
 
     
