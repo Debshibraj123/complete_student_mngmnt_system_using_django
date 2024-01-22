@@ -29,37 +29,29 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Subject Name</th>
-                                    <th>Course</th>
-                                    <th>Staff</th>
-                                    <th class="text-right">Action</th>
+                                    <th>Session Year Start</th>
+                                    <th>Session Year Start</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for s in subject %}
+                                {% for s in session %}
                                 <tr>
                                     <td>{{ s.pk }}</td>
                                     <td>
 
-                                        <a href="student-details.html">{{s.name}}</a>
+                                        <a href="student-details.html">{{s.session_start}}</a>
 
                                     </td>
                                     <td>
 
-                                        <a href="student-details.html">{{s.course}}</a>
-
-                                    </td>
-                                    <td>
-
-                                        <a href="student-details.html">{{s.staff.admin.first_name}}&nbsp;{{s.staff.admin.last_name}}</a>
+                                        <a href="student-details.html">{{s.session_end}}</a>
 
                                     </td>
                                     <td>
                                     <div class="actions">
-                                        <a href="{% url 'edit_subject' s.id %}" class="btn btn-sm bg-success-light mr-2">
-                                            <i class="fas fa-pen"></i>
-                                        </a>
-                                        <a href="{% url 'delete_subject' s.id %}" class="btn btn-sm bg-danger-light">
+                                    
+                                        <a href="{% url 'delete_session' s.id %}" class="btn btn-sm bg-danger-light">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </div>
