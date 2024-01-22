@@ -395,4 +395,14 @@ def UPDATE_SUBJECT(request):
     }
 
     return render(request, 'Hod/edit_subject.html', context)
+
+
+
+def DELETE_SUBJECT(request, id):
+    subject = Subject.objects.filter(id = id)
+    subject.delete()
+    messages.success(request, 'Subject deleted Successfully')
+    return redirect('view_subject')
+
+
     
