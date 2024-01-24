@@ -45,6 +45,11 @@ urlpatterns = [
     path('Hod/Session/Add', Hod_Views.ADD_SESSION, name = 'add_session'),
     path('Hod/Session/View', Hod_Views.VIEW_SESSION, name = 'view_session'),
     # path('Hod/Session/Edit/<str:id>', Hod_Views.EDIT_SESSION, name = 'edit_session'),
-    path('Hod/Session/Delete/<str:id>', Hod_Views.DELETE_SESSION, name = 'delete_session')
+    path('Hod/Session/Delete/<str:id>', Hod_Views.DELETE_SESSION, name = 'delete_session'),
+
+    #This is staff Urls
+    path('Staff/Home', Staff_Views.HOME, name='staff_home'),
+    path('Hod/Staff/Send_Notification', Hod_Views.STAFF_SEND_NOTIFICATION, name='staff_send_notification'),
+
 
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

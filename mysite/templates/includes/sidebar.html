@@ -3,6 +3,7 @@
 <div class="sidebar" id="sidebar">
     <div class="sidebar-inner slimscroll">
        <div id="sidebar-menu" class="sidebar-menu">
+         {% if user.user_type == '1' %}
           <ul>
              <li class="menu-title">
                 <span>Main Menu</span>
@@ -52,6 +53,14 @@
             </li>
              
              <li>
+               <a href="{% url 'staff_send_notification' %}"><i class="fas fa-holly-berry"></i><span>Send Staff Notification</span></a>
+             </li>
+
+             <li>
+               <a href=""><i class="fas fa-holly-berry"></i><span>Send Student Notification</span></a>
+             </li>
+
+             <li>
                <a href=""><i class="fas fa-holly-berry"></i><span>View Attendence</span></a>
              </li>
 
@@ -75,6 +84,47 @@
                <a href=""><i class="fas fa-holly-berry"></i><span>Logout</span></a>
              </li>
           </ul>
+          
+          {% elif user.user_type == '2' %}
+          <ul>
+            <li class="menu-title">
+               <span>Main Menu</span>
+            </li>
+            <li>
+              <a href="{% url 'hod_home' %}"><i class="fas fa-user-graduate"></i> <span>DashBoard</span></a>
+           </li>
+
+           <li>
+            <a href="{% url 'hod_home' %}"><i class="fas fa-user-graduate"></i> <span>Take Attendence</span></a>
+         </li>
+
+         <li>
+            <a href="{% url 'hod_home' %}"><i class="fas fa-user-graduate"></i> <span>Update Attendence</span></a>
+         </li>
+
+         <li>
+            <a href="{% url 'hod_home' %}"><i class="fas fa-user-graduate"></i> <span>Add Result</span></a>
+         </li>
+
+         <li>
+            <a href="{% url 'hod_home' %}"><i class="fas fa-user-graduate"></i> <span>Apply For Leave</span></a>
+         </li>
+
+         <li>
+            <a href="{% url 'hod_home' %}"><i class="fas fa-user-graduate"></i> <span>Send Feedback</span></a>
+         </li>
+
+         <li>
+            <a href="{% url 'hod_home' %}"><i class="fas fa-user-graduate"></i> <span>Logout</span></a>
+         </li>
+
+          </ul>
+          {% else %}
+
+         <h1>This is student Sidebar</h1>
+          {% endif %}
+         
+
        </div>
     </div>
  </div>

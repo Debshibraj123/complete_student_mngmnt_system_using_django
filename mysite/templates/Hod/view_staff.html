@@ -1,86 +1,106 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="main-wrapper">
-<div class="page-wrapper">
+  <div class="page-wrapper">
     <div class="container-fluid">
-       <div class="page-header">
-          <div class="row align-items-center">
-             <div class="col">
-                <h3 class="page-title">Students</h3>
-                <ul class="breadcrumb">
-                   <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                   <li class="breadcrumb-item active">Students</li>
-                </ul>
-             </div>
-             <div class="col-auto text-right float-right ml-auto">
-                <a href="#" class="btn btn-outline-primary mr-2"><i class="fas fa-download"></i> Download</a>
-                <a href="add-student.html" class="btn btn-primary"><i class="fas fa-plus"></i></a>
-             </div>
+      <div class="page-header">
+        <div class="row align-items-center">
+          <div class="col">
+            <h3 class="page-title">Students</h3>
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="index.html">Dashboard</a>
+              </li>
+              <li class="breadcrumb-item active">Students</li>
+            </ul>
           </div>
-       </div>
-       <div class="row ">
-         {% if messages %}
-         {% for messages in messages %}
-         {% if messages.tags  == 'error' %}
-         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-           {{messages}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+          <div class="col-auto text-right float-right ml-auto">
+            <a href="#" class="btn btn-outline-primary mr-2"
+              ><i class="fas fa-download"></i> Download</a
+            >
+            <a href="add-student.html" class="btn btn-primary"
+              ><i class="fas fa-plus"></i
+            ></a>
           </div>
-          {% endif %}
-          {% endfor %}
-          {% endif %}
-          <div class="col-sm-12">
-             <div class="card card-table">
-                <div class="card-body">
-                   <div class="table-responsive">
-                      <table id="table_id" class="table table-hover table-center mb-0 datatable">
-                         <thead>
-                            <tr>
-                               <th>ID</th>
-                               <th>Name</th>
-                               <th>Email</th>
-                               <th>Gender</th>
-                               <th>Address</th>
-                               <th class="text-right">Actions</th>
-                            </tr>
-                         </thead>
-                         <tbody>
-                           {% for s in staff %}
-                            <tr>
-                               <td>{{ s.pk }}</td>
-                               <td>
-                                  <h2 class="table-avatar">
-                                     <a href="student-details.html">{{s.admin.first_name}}&nbsp{{s.admin.last_name}}</a>
-                                  </h2>
-                               </td>
-                               <td>{{s.admin.email}}</td>
-                              
-                               <td>{{s.gender}}</td>
-                               <td>{{s.address}}</td>
-                               <td class="text-right">
-                                  <div class="actions">
-                                     <a href="{% url 'edit_staff' s.id %}" class="btn btn-sm bg-success-light mr-2">
-                                     <i class="fas fa-pen"></i>
-                                     </a>
-                                     <a href="{% url 'delete_staff' s.admin.id %}" class="btn btn-sm bg-danger-light">
-                                     <i class="fas fa-trash"></i>
-                                     </a>
-                                  </div>
-                               </td>
-                            </tr>
-                            {% endfor %}
-                         </tbody>
-                      </table>
-                   </div>
-                </div>
-             </div>
+        </div>
+      </div>
+      <div class="row">
+        {% if messages %} {% for messages in messages %} {% if messages.tags ==
+        'error' %}
+        <div
+          class="alert alert-warning alert-dismissible fade show"
+          role="alert"
+        >
+          {{messages}}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+         {% endfor %} {% endif %}
+        <div class="col-sm-12">
+          <div class="card card-table">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table
+                  id="table_id"
+                  class="table table-hover table-center mb-0 datatable"
+                >
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Gender</th>
+                      <th>Address</th>
+                      <th class="text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for s in staff %}
+                    <tr>
+                      <td>{{ s.pk }}</td>
+                      <td>
+                        <h2 class="table-avatar">
+                          <a href="student-details.html"
+                            >{{s.admin.first_name}}&nbsp{{s.admin.last_name}}</a
+                          >
+                        </h2>
+                      </td>
+                      <td>{{s.admin.email}}</td>
+
+                      <td>{{s.gender}}</td>
+                      <td>{{s.address}}</td>
+                      <td class="text-right">
+                        <div class="actions">
+                          <a
+                            href="{% url 'edit_staff' s.id %}"
+                            class="btn btn-sm bg-success-light mr-2"
+                          >
+                            <i class="fas fa-pen"></i>
+                          </a>
+                          <a
+                            href="{% url 'delete_staff' s.admin.id %}"
+                            class="btn btn-sm bg-danger-light"
+                          >
+                            <i class="fas fa-trash"></i>
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
-       </div>
+        </div>
+      </div>
     </div>
- </div>
+  </div>
 </div>
 
-{% endblock  %}
+{% endblock %}

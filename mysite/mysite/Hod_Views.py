@@ -464,3 +464,11 @@ def DELETE_SESSION(request, id):
     messages.error(request,"The data has been deleted")
     return redirect('view_session')
 
+def STAFF_SEND_NOTIFICATION(request):
+    staff = Staff.objects.all()
+
+    context = {
+      'staff':staff    
+    }
+    
+    return render(request, 'Hod/staff_notification.html', context)
