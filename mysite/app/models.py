@@ -100,7 +100,7 @@ class Staff_leave(models.Model):
 class Staff_Feedback(models.Model):
     staff_id = models.ForeignKey(Staff, on_delete=models.CASCADE)
     feedback = models.TextField()
-    feedback_reply = models.TextField()
+    feedback_reply = models.TextField(null = True)
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now_add=True)
 

@@ -71,28 +71,27 @@
                             <table id="table_id" class="table table-hover table-center mb-0">
                                <thead>
                                   <tr>
-                                     <th>Date</th>
-                                     <th>Message</th>
-                                     <th class="text-right">Status</th>
+                                     <th>ID</th>
+                                     <th>Feedback</th>
+                                     <th>Reply</th>
                                   </tr>
                                </thead>
                                <tbody>
-                                 {% for s in staff_leave_history %}
+                                 {% for i in feedback_history %}
                                   <tr>
-                                     <td>{{ s.leave_date }}</td>
+                                     <td>{{ i.id }}</td>
                                      <td>
                                         <h2 class="table-avatar">
-                                           <a href="student-details.html">{{s.message}}</a>
+                                           <a href="student-details.html">{{i.feedback}}</a>
                                         </h2>
                                      </td>
                                      <td>
                                         <div class="actions text-right">
-                                            {% if i.status == 0 %}
-                                            <span class="badge badge-warning">Request Pending</span>
-                                            {% elif i.status == 1 %}
-                                            <span class="badge badge-success">Request Approved</span >
+                                            {% if i.feedback_reply == "" %}
+                                            <span class="badge badge-warning">No reply</span>
+                            
                                             {% else %}
-                                            <span class="badge badge-danger">Rejected</span>
+                                            <span class="badge badge-danger">{{i.feedback_reply}}</span>
                                             {% endif %}
                                         </div>
                                      </td>

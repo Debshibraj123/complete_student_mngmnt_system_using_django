@@ -61,7 +61,16 @@ def STAFF_APPLY_LEAVE(request):
         return render(request, 'Staff/apply_leave.html', context)
     
 def STAFF_FEEDBACK(request):
-    return render(request, 'Staff/feedback.html')
+    
+    staff_id = Staff.objects.get(admin = request.user.id)
+
+    feedback_history = Staff_Feedback.objects.filter(staff_id = staff_id)
+
+    context = {
+     'feedback_history':feedback_history,
+    }
+
+    return render(request, 'Staff/feedback.html', context)
 
 def STAFF_FEEDBACK_SAVE(request):
     if request.method == 'POST':
@@ -75,5 +84,5 @@ def STAFF_FEEDBACK_SAVE(request):
         )
 
         feedback.save()
-        messages.info(request,"Your Feedback has been Submitted Successfully!")
+        messages.success(request,"Your Feedback has been Submitted Successfully!")
         return redirect("staff_feedback")
