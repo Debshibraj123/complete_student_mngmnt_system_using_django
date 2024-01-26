@@ -78,28 +78,29 @@
                             <table id="table_id" class="table table-hover table-center mb-0">
                                <thead>
                                   <tr>
-                                     <th>ID</th>
-                                     <th>Name</th>
-                                     <th class="text-right">Action</th>
+                                     <th>Date</th>
+                                     <th>Message</th>
+                                     <th class="text-right">Status</th>
                                   </tr>
                                </thead>
                                <tbody>
-                                 {% for s in course %}
+                                 {% for s in staff_leave_history %}
                                   <tr>
-                                     <td>{{ s.pk }}</td>
+                                     <td>{{ s.leave_date }}</td>
                                      <td>
                                         <h2 class="table-avatar">
-                                           <a href="student-details.html">{{s.name}}</a>
+                                           <a href="student-details.html">{{s.message}}</a>
                                         </h2>
                                      </td>
                                      <td>
-                                        <div class="actions">
-                                           <a href="{% url 'edit_course' s.id %}" class="btn btn-sm bg-success-light mr-2">
-                                           <i class="fas fa-pen"></i>
-                                           </a>
-                                           <a href="{% url 'delete_course' s.id %}" class="btn btn-sm bg-danger-light">
-                                           <i class="fas fa-trash"></i>
-                                           </a>
+                                        <div class="actions text-right">
+                                            {% if i.status == 0 %}
+                                            <span class="badge badge-warning">Request Pending</span>
+                                            {% elif i.status == 1 %}
+                                            <span class="badge badge-success">Request Approved</span >
+                                            {% else %}
+                                            <span class="badge badge-danger">Rejected</span>
+                                            {% endif %}
                                         </div>
                                      </td>
                                   </tr>

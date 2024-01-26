@@ -490,3 +490,26 @@ def SAVE_STAFF_NOTIFICATION(request):
         notification.save()
         messages.success(request, "Message Sent Successfully")
         return redirect('staff_send_notification')
+    
+
+def STAFF_LEAVE_VIEW(request):
+
+    staff_leave = Staff_leave.objects.all()
+
+    context = {
+      'staff_leave':staff_leave,
+    }
+
+    return render(request, 'Hod/staff_leave.html', context)
+
+def STAFF_APPROVE_LEAVE(request, id):
+    leave = Staff_leave.objects.get(id = id)
+    leave.status = 1
+    leave.save()
+    return redirect('staff_leave_view')
+
+def STAFF_DISAPPROVE_LEAVE(request, id):
+    leave = Staff_leave.objects.get(id = id)
+    leave.status = 2
+    leave.save()
+    return redirect('staff_leave_view')

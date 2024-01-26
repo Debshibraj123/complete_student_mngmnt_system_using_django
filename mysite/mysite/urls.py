@@ -46,6 +46,11 @@ urlpatterns = [
     path('Hod/Session/View', Hod_Views.VIEW_SESSION, name = 'view_session'),
     # path('Hod/Session/Edit/<str:id>', Hod_Views.EDIT_SESSION, name = 'edit_session'),
     path('Hod/Session/Delete/<str:id>', Hod_Views.DELETE_SESSION, name = 'delete_session'),
+    path('Hod/Staff/Leave_view', Hod_Views.STAFF_LEAVE_VIEW, name='staff_leave_view'),
+    path('Hod/Staff/approve_leave/<str:id>', Hod_Views.STAFF_APPROVE_LEAVE, name='staff_approve_leave'),
+    path('Hod/Staff/disapprove_leave/<str:id>', Hod_Views.STAFF_DISAPPROVE_LEAVE, name='staff_disapprove_leave'),
+    
+
 
     #This is staff Urls
     path('Staff/Home', Staff_Views.HOME, name='staff_home'),
@@ -54,7 +59,7 @@ urlpatterns = [
     path('Staff/Notification', Staff_Views.NOTIFICATION, name='notification'),
     path('Staff/mark_as_done/<str:status>', Staff_Views.MARK_AS_DONE, name='mark_as_done'),
     path('Staff/Apply_leave', Staff_Views.STAFF_APPLY_LEAVE, name='staff_apply_leave'),
-    path('Staff/Apply_leave_save', Staff_Views.STAFF_APPLY_LEAVE_SAVE, name='staff_apply_leave_save')
+    path('Staff/Apply_leave_save', Staff_Views.STAFF_APPLY_LEAVE_SAVE, name='staff_apply_leave_save'),
 
 
 

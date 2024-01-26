@@ -46,3 +46,16 @@ def STAFF_APPLY_LEAVE_SAVE(request):
         messages.success(request, "Successfully Applied For Leave")
 
         return redirect('staff_apply_leave')
+
+
+def STAFF_APPLY_LEAVE(request):
+    staff = Staff.objects.filter(admin = request.user.id)
+    for i in staff:
+        staff_id = i.id
+
+        staff_leave_history = Staff_leave.objects.filter(staff_id = staff_id)
+
+        context = {
+         'staff_leave_history':staff_leave_history,
+        }
+        return render(request, 'Staff/apply_leave.html', context)
