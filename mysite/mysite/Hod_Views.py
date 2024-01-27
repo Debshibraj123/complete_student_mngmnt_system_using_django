@@ -7,7 +7,7 @@ from django.http import Http404
 
 
 
-@login_required(login_url='/')
+# @login_required(login_url='/' )
 def HOME(request):
 
     student_count = Student.objects.all().count()
@@ -513,3 +513,26 @@ def STAFF_DISAPPROVE_LEAVE(request, id):
     leave.status = 2
     leave.save()
     return redirect('staff_leave_view')
+
+def STAFF_FEEDBACK(request):
+    feedback = Staff_Feedback.objects.all()
+
+    context = {
+       'feedback':feedback,    
+    }
+
+
+    return render(request, 'Hod/staff_feedback.html', context)
+
+
+def STAFF_FEEDBACK_SAVES(request):
+    if request.method == 'POST':
+        feedback_id = request.POST.get('feedback_id')
+        feedback_reply = request.POST.get('feedback_reply')
+
+        feedback = Staff_Feedback.objects.get(id=feedback_id)
+        feedback.feedback_reply = feedback_reply
+        feedback.save()
+
+        messages.success(request, 'Successfully Done')
+        return redirect('staff_feedback')
