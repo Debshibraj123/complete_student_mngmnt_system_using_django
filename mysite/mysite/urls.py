@@ -63,6 +63,10 @@ urlpatterns = [
     path('Staff/Feedback', Staff_Views.STAFF_FEEDBACK, name='staff_feedback'),
     path('Staff/Feedback/Save', Staff_Views.STAFF_FEEDBACK_SAVE, name='staff_feedback_save'),
     path('Hod/Staff/feedback', Hod_Views.STAFF_FEEDBACK, name='staff_feedback'),
-    path('Hod/Staff/feedback/save', Hod_Views.STAFF_FEEDBACK_SAVES, name='staff_feedback_saves')
+    path('Hod/Staff/feedback/save', Hod_Views.STAFF_FEEDBACK_SAVES, name='staff_feedback_saves'),
+
+
+    #students
+    path('Student/Home', Student_Views.STUDENT_HOME, name='student_home')
 
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

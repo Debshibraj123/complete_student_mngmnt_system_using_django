@@ -125,8 +125,43 @@
 
           </ul>
           {% else %}
+         
+          <ul>
+            <li class="menu-title">
+               <span>Main Menu</span>
+            </li>
+            <li>
+              <a href="{% url 'student_home' %}"><i class="fas fa-user-graduate"></i> <span>DashBoard</span></a>
+           </li>
 
-         <h1>This is student Sidebar</h1>
+           <li>
+            <a href="{% url 'student_home' %}"><i class="fas fa-user-graduate"></i> <span>View Attendence</span></a>
+         </li>
+
+         <li>
+            <a href="{% url 'student_home' %}"><i class="fas fa-user-graduate"></i> <span> View Result</span></a>
+         </li>
+
+         <li>
+            <a href="{% url 'student_home' %}"><i class="fas fa-user-graduate"></i> <span>Apply For Leave</span></a>
+         </li>
+
+         
+         <li>
+            <a href="{% url 'student_home' %}"><i class="fas fa-user-graduate"></i> <span>Send Feedback</span></a>
+         </li>
+         
+         <li>
+            <a href="{% url 'student_home' %}"><i class="fas fa-user-graduate"></i> <span>Notifications</span></a>
+         </li>
+         
+         <li>
+            <a href="{% url 'student_home' %}"><i class="fas fa-user-graduate"></i> <span>Logout</span></a>
+         </li>
+
+
+      </ul>
+
           {% endif %}
          
 
