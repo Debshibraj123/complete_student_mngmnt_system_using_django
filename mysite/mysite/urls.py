@@ -64,6 +64,7 @@ urlpatterns = [
     path('Staff/Feedback/Save', Staff_Views.STAFF_FEEDBACK_SAVE, name='staff_feedback_save'),
     path('Hod/Staff/feedback', Hod_Views.STAFF_FEEDBACK, name='staff_feedback'),
     path('Hod/Staff/feedback/save', Hod_Views.STAFF_FEEDBACK_SAVES, name='staff_feedback_saves'),
+    path('Hod/Student/send_notification', Hod_Views.STUDENT_SEND_NOTIFICATION, name='student_send_notification'),
 
 
     #students

@@ -61,8 +61,9 @@ def ADD_STUDENT(request):
                email = email,
                user_type = 3
             )
-            user.set_password(password)
+            user.set_password = password
             user.save()
+            
 
             course = Course.objects.get(id = course)
             session_year = Session_Year.objects.get(id = session_year)
@@ -537,3 +538,13 @@ def STAFF_FEEDBACK_SAVES(request):
         messages.success(request, 'Successfully Done')
         return redirect('staff_feedback')
     
+def STUDENT_SEND_NOTIFICATION(request):
+
+    student = Student.objects.all()
+
+    context = {
+      'student': student    
+    }
+     
+
+    return render(request, 'Hod/student_notification.html')
