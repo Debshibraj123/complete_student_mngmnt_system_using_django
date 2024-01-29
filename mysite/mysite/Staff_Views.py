@@ -86,3 +86,21 @@ def STAFF_FEEDBACK_SAVE(request):
         feedback.save()
         messages.success(request,"Your Feedback has been Submitted Successfully!")
         return redirect("staff_feedback")
+    
+
+def STAFF_TAKE_ATTENDENCE(request):
+    if request.user.is_authenticated:
+        staff, created = Staff.objects.get_or_create(admin=request.user)
+
+        subject = Subject.objects.filter(staff=staff)
+        session_year = Session_Year.objects.all()
+
+        context = {
+            'subject': subject,
+            'session_year': session_year,
+        }
+
+        return render(request, 'Staff/take_attendence.html', context)
+    else:
+        # Handle the case where the user is not authenticated
+        return render(request, 'error_page.html', {'error_message': 'User is not authenticated'})

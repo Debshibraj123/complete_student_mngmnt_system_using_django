@@ -1,0 +1,68 @@
+{% extends "base.html" %} 
+{% block content %}
+
+<div class="content container-fluid">
+  <div class="page-header">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="page-title">Take Attendence</h3>
+        <ul class="breadcrumb">
+          <li class="breadcrumb-item"><a href="subjects.html">Attendence</a></li>
+          <li class="breadcrumb-item active">Take Attendence</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+
+        {% if messages %}
+                        {% for messages in messages %}
+                        {% if messages.tags  == 'success' %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                          {{messages}}
+                         </div>
+                         {% endif %}
+                         {% endfor %}
+                         {% endif %}
+
+      <div class="card">
+        <div class="card-body">
+          <form action="" method="post">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-12">
+                <h5 class="form-title"><span>Take Attendence</span></h5>
+              </div>
+              
+              <div class="col-12 col-sm-6">
+                <label>Select Subject</label>
+                <select class="form-control" name="course" required>
+                  <option>Subject</option>
+                  {% for i in subject %}
+                  <option value="{{i.id}}">{{i.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-12 col-sm-6">
+                <label>Session Year</label>
+                <select class="form-control" name="staff" required>
+                  <option>Select Session</option>
+                  {% for i in session_year %}
+                  <option value="{{i.id}}">{{i.session_start}}&nbsp;</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-12 mt-4">
+                <button type="submit" class="btn btn-primary">Fetch Student</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
