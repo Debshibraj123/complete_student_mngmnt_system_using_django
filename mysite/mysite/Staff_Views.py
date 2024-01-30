@@ -95,9 +95,25 @@ def STAFF_TAKE_ATTENDENCE(request):
         subject = Subject.objects.filter(staff=staff)
         session_year = Session_Year.objects.all()
 
+        action = request.GET.get('action')
+        
+        # get_subject = None
+        # get_session_year = None
+
+        if action is not None:
+            if request.method == 'POST':
+                subject = request.POST.get('subject_id')
+                session_year_id = request.POST.get('session_year_id')
+
+                # get_subject = Subject.objects.get(id = subject)
+                # get_session_year = Session_Year.objects.get(id = session_year_id)
+                
+
         context = {
             'subject': subject,
             'session_year': session_year,
+            # 'get_subject': get_subject,
+            # 'get_session_year':get_session_year
         }
 
         return render(request, 'Staff/take_attendence.html', context)

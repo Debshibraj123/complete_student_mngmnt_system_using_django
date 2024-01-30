@@ -29,7 +29,7 @@
 
       <div class="card">
         <div class="card-body">
-          <form action="" method="post">
+          <form action="?action=get_student"  method="post">
             {% csrf_token %}
             <div class="row">
               <div class="col-12">
@@ -38,7 +38,7 @@
               
               <div class="col-12 col-sm-6">
                 <label>Select Subject</label>
-                <select class="form-control" name="course" required>
+                <select class="form-control" name="subject_id" required>
                   <option>Subject</option>
                   {% for i in subject %}
                   <option value="{{i.id}}">{{i.name}}</option>
@@ -47,7 +47,7 @@
               </div>
               <div class="col-12 col-sm-6">
                 <label>Session Year</label>
-                <select class="form-control" name="staff" required>
+                <select class="form-control" name="session_year_id" required>
                   <option>Select Session</option>
                   {% for i in session_year %}
                   <option value="{{i.id}}">{{i.session_start}}&nbsp;</option>
